@@ -1,30 +1,51 @@
-"use client"
+"use client";
 
-import { useState } from "react"
-import { Button } from "@/components/ui/button"
-import { Textarea } from "@/components/ui/textarea"
-import { Slider } from "@/components/ui/slider"
-import { Card, CardContent, CardHeader, CardTitle, CardDescription } from "@/components/ui/card"
-import { Label } from "@/components/ui/label"
+import { useState } from "react";
+import { Button } from "@/components/ui/button";
+import { Textarea } from "@/components/ui/textarea";
+import { Slider } from "@/components/ui/slider";
+import { Card, CardContent, CardHeader, CardTitle, CardDescription } from "@/components/ui/card";
+import { Label } from "@/components/ui/label";
 
 export default function ModifyPage() {
-  const [inputText, setInputText] = useState("")
-  const [formalValue, setFormalValue] = useState<number[]>([3])
-  const [taskOrientedValue, setTaskOrientedValue] = useState<number[]>([3])
-  const [suggestionResult, setSuggestionResult] = useState<string | null>(null)
+  const [inputText, setInputText] = useState("");
+  const [formalValue, setFormalValue] = useState<number[]>([3]);
+  const [taskOrientedValue, setTaskOrientedValue] = useState<number[]>([3]);
+  const [suggestionResult, setSuggestionResult] = useState<string | null>(null);
 
-  const handleSuggestModification = () => {
-    // Placeholder for actual modification logic
+  // const handleSuggestModification = () => {
+  //   // Placeholder for actual modification logic
+  //   if (inputText.trim() === "") {
+  //     setSuggestionResult("수정할 텍스트를 입력해주세요.")
+  //     return
+  //   }
+  //   const placeholderResult = `입력된 텍스트: "${inputText}"\n\n수정 목표:\n- 격식: ${formalValue[0]}/5\n- 과업지향성: ${taskOrientedValue[0]}/5\n\n수정 제안:\n(여기에 수정된 텍스트가 표시됩니다. 현재는 플레이스홀더입니다.)\n\n예시: 텍스트가 좀 더 ${formalValue[0] < 3 ? "비격식적이고" : formalValue[0] > 3 ? "격식적이고" : "중립적이고"}, ${taskOrientedValue[0] < 3 ? "사회정서적이며" : taskOrientedValue[0] > 3 ? "과업지향적이며" : "균형잡힌"} 톤으로 수정되었습니다.`
+  //   setSuggestionResult(placeholderResult)
+  // }
+
+  const handleSuggestModification = async () => {
     if (inputText.trim() === "") {
-      setSuggestionResult("수정할 텍스트를 입력해주세요.")
-      return
+      setSuggestionResult("수정할 텍스트를 입력해주세요.");
+      return;
     }
-    const placeholderResult = `입력된 텍스트: "${inputText}"\n\n수정 목표:\n- 격식: ${formalValue[0]}/5\n- 과업지향성: ${taskOrientedValue[0]}/5\n\n수정 제안:\n(여기에 수정된 텍스트가 표시됩니다. 현재는 플레이스홀더입니다.)\n\n예시: 텍스트가 좀 더 ${formalValue[0] < 3 ? "비격식적이고" : formalValue[0] > 3 ? "격식적이고" : "중립적이고"}, ${taskOrientedValue[0] < 3 ? "사회정서적이며" : taskOrientedValue[0] > 3 ? "과업지향적이며" : "균형잡힌"} 톤으로 수정되었습니다.`
-    setSuggestionResult(placeholderResult)
-  }
+    setSuggestionResult("수정 중입니다...");
 
-  const sliderLabelsFormal = ["1 비격식", "2", "3 중립", "4", "5 격식"]
-  const sliderLabelsTask = ["1 사회정서적", "2", "3 균형", "4", "5 과업지향적"]
+    const res = await fetch("/api/modify", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({
+        text: inputText,
+        style: taskOrientedValue[0], // 1~5
+        formality: formalValue[0], // 1~5
+      }),
+    });
+    const data = await res.json();
+
+    setSuggestionResult(data.result);
+  };
+
+  const sliderLabelsFormal = ["1 비격식", "2", "3 중립", "4", "5 격식"];
+  const sliderLabelsTask = ["1 사회정서적", "2", "3 균형", "4", "5 과업지향적"];
 
   return (
     <div className="container mx-auto p-4 md:p-8">
@@ -118,5 +139,5 @@ export default function ModifyPage() {
         </div>
       </div>
     </div>
-  )
+  );
 }
