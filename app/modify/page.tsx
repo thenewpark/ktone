@@ -44,8 +44,8 @@ export default function ModifyPage() {
     setSuggestionResult(data.result);
   };
 
-  const sliderLabelsFormal = ["1 비격식", "2", "3 중립", "4", "5 격식"];
-  const sliderLabelsTask = ["1 사회정서적", "2", "3 균형", "4", "5 과업지향적"];
+  const sliderLabelsFormal = ["1 매우 비격식", "2 비격식", "3 중립", "4 격식", "5 매우 격식"];
+  const sliderLabelsTask = ["1 극히 사회정서적", "2 사회정서적", "3 균형", "과업지향적", "5 극히 과업지향적"];
 
   return (
     <div className="container mx-auto p-4 md:p-8">
