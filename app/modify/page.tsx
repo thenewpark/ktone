@@ -69,7 +69,7 @@ export default function ModifyPage() {
             </CardHeader>
             <CardContent className="space-y-6">
               <div>
-                <div className="flex justify-between items-center mb-1">
+                <div className="flex justify-between items-center mb-4">
                   <Label htmlFor="formal-slider" className="text-sm">
                     격식
                   </Label>
@@ -83,15 +83,15 @@ export default function ModifyPage() {
                   value={formalValue}
                   onValueChange={setFormalValue}
                 />
-                <div className="flex justify-between text-xs text-muted-foreground mt-1">
+                <div className="flex justify-between text-xs text-muted-foreground mt-4">
                   <span>비격식</span>
                   <span>격식</span>
                 </div>
               </div>
               <div>
-                <div className="flex justify-between items-center mb-1">
+                <div className="flex justify-between items-center mb-4">
                   <Label htmlFor="task-slider" className="text-sm">
-                    지향성
+                    스타일
                   </Label>
                   <span className="text-sm font-medium text-primary">{sliderLabelsTask[taskOrientedValue[0] - 1]}</span>
                 </div>
@@ -103,7 +103,7 @@ export default function ModifyPage() {
                   value={taskOrientedValue}
                   onValueChange={setTaskOrientedValue}
                 />
-                <div className="flex justify-between text-xs text-muted-foreground mt-1">
+                <div className="flex justify-between text-xs text-muted-foreground mt-4">
                   <span>사회정서적</span>
                   <span>과업지향적</span>
                 </div>
