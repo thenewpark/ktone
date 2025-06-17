@@ -13,16 +13,6 @@ export default function ModifyPage() {
   const [taskOrientedValue, setTaskOrientedValue] = useState<number[]>([3]);
   const [suggestionResult, setSuggestionResult] = useState<string | null>(null);
 
-  // const handleSuggestModification = () => {
-  //   // Placeholder for actual modification logic
-  //   if (inputText.trim() === "") {
-  //     setSuggestionResult("수정할 텍스트를 입력해주세요.")
-  //     return
-  //   }
-  //   const placeholderResult = `입력된 텍스트: "${inputText}"\n\n수정 목표:\n- 격식: ${formalValue[0]}/5\n- 과업지향성: ${taskOrientedValue[0]}/5\n\n수정 제안:\n(여기에 수정된 텍스트가 표시됩니다. 현재는 플레이스홀더입니다.)\n\n예시: 텍스트가 좀 더 ${formalValue[0] < 3 ? "비격식적이고" : formalValue[0] > 3 ? "격식적이고" : "중립적이고"}, ${taskOrientedValue[0] < 3 ? "사회정서적이며" : taskOrientedValue[0] > 3 ? "과업지향적이며" : "균형잡힌"} 톤으로 수정되었습니다.`
-  //   setSuggestionResult(placeholderResult)
-  // }
-
   const handleSuggestModification = async () => {
     if (inputText.trim() === "") {
       setSuggestionResult("수정할 텍스트를 입력해주세요.");
@@ -44,8 +34,8 @@ export default function ModifyPage() {
     setSuggestionResult(data.result);
   };
 
-  const sliderLabelsFormal = ["1 매우 비격식", "2 비격식", "3 중립", "4 격식", "5 매우 격식"];
-  const sliderLabelsTask = ["1 극히 사회정서적", "2 사회정서적", "3 균형", "과업지향적", "5 극히 과업지향적"];
+  const sliderLabelsFormal = ["1 매우 격식", "2 격식", "3 중립", "4 비격식", "5 매우 비격식"];
+  const sliderLabelsTask = ["1 극히 과업지향적", "2 과업지향적", "3 균형", "사회정서적", "5 극히 사회정서적"];
 
   return (
     <div className="container mx-auto p-4 md:p-8">
@@ -71,7 +61,7 @@ export default function ModifyPage() {
               <div>
                 <div className="flex justify-between items-center mb-4">
                   <Label htmlFor="formal-slider" className="text-sm">
-                    격식
+                    격식도
                   </Label>
                   <span className="text-sm font-medium text-primary">{sliderLabelsFormal[formalValue[0] - 1]}</span>
                 </div>
@@ -84,8 +74,8 @@ export default function ModifyPage() {
                   onValueChange={setFormalValue}
                 />
                 <div className="flex justify-between text-xs text-muted-foreground mt-4">
-                  <span>비격식</span>
                   <span>격식</span>
+                  <span>비격식</span>
                 </div>
               </div>
               <div>
@@ -104,8 +94,8 @@ export default function ModifyPage() {
                   onValueChange={setTaskOrientedValue}
                 />
                 <div className="flex justify-between text-xs text-muted-foreground mt-4">
-                  <span>사회정서적</span>
                   <span>과업지향적</span>
+                  <span>사회정서적</span>
                 </div>
               </div>
               <Button onClick={handleSuggestModification} className="w-full">
