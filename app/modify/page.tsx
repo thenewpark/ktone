@@ -35,7 +35,7 @@ export default function ModifyPage() {
   };
 
   const sliderLabelsFormal = ["1 매우 격식", "2 격식", "3 중립", "4 비격식", "5 매우 비격식"];
-  const sliderLabelsTask = ["1 극히 과업지향적", "2 과업지향적", "3 균형", "사회정서적", "5 극히 사회정서적"];
+  const sliderLabelsTask = ["1 극히 과업지향적", "2 과업지향적", "3 균형", "4 사회정서적", "5 극히 사회정서적"];
 
   return (
     <div className="container mx-auto p-4 md:p-8">
